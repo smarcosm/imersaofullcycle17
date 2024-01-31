@@ -31,6 +31,14 @@ func (cd *CategoryDB) GetCategories() ([]*enttity.Category, error) {
 	}
 	return categories, nil
 }
+func (cd *CategoryDB) GetCategory(id string) (*enttity.Category, error) {
+	var category enttity.Category
+	err := cd.db.QueryRow("SELECT id, name FROM categories WHERE id = ?", id).Scan(&category.ID, &category.Name)
+	if err != nil {
+		return nil, err
+	}
+	return &category, nil
+}
 
 func (cd *CategoryDB) CreateCategory(category *enttity.Category) (string, error) {
 	_, err := cd.db.Exec("INSERT INTO categories (id, name) VALUES (?, ?)", category.ID, category.Name)
