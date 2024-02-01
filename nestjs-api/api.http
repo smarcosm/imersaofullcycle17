@@ -1,0 +1,12 @@
+GET http://localhost:3000/products
+
+###
+POST http://localhost:3000/products
+Content-Type: application/json
+
+{
+  "name": "Product 2",
+  "description": "Product 2 description",
+  "image_url": "https://via.placehold.com/151",
+  "price": 150
+}
