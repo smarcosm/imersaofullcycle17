@@ -1,6 +1,9 @@
 GET http://localhost:3000/products
 
 ###
+GET http://localhost:3000/products/0afa7630-4fc1-4d69-beed-4f8f15becadc
+
+###
 POST http://localhost:3000/products
 Content-Type: application/json
 
@@ -9,4 +12,27 @@ Content-Type: application/json
   "description": "Product 2 description",
   "image_url": "https://via.placehold.com/151",
   "price": 150
+}
+
+###
+GET http://localhost:3000/orders
+
+
+###
+POST http://localhost:3000/orders
+Content-Type: application/json
+
+{
+  "items": [
+    {
+      "product_id": "0afa7630-4fc1-4d69-beed-4f8f15becadc",
+      "quantity": 1
+    },
+     {
+      "product_id": "557be765-4f09-49b1-bd33-b7e30fc7316c",
+      "quantity": 1
+    }
+  ],
+  "card_hash": "123"
+ 
 }
