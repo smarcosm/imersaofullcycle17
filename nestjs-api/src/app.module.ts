@@ -8,6 +8,7 @@ import { OrdersModule } from './orders/orders.module';
 import { OrderItem } from './orders/entities/order-item.entity';
 import { Order } from './orders/entities/order.entity';
 import { AuthModule } from './auth/auth.module';
+import { RabbitmqModule } from './rabbitmq/rebbitmq.module';
 
 @Module({
   imports: [
@@ -25,6 +26,7 @@ import { AuthModule } from './auth/auth.module';
     ProductsModule,
     OrdersModule,
     AuthModule,
+    RabbitmqModule,
   ],
   controllers: [AppController],
   providers: [AppService],

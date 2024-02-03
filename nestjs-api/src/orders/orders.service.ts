@@ -4,12 +4,14 @@ import { Order } from './entities/order.entity';
 import { InjectRepository } from '@nestjs/typeorm';
 import { In, Repository } from 'typeorm';
 import { Product } from '../products/entities/product.entity';
+import { AmqpConnection } from '@golevelup/nestjs-rabbitmq';
 
 @Injectable()
 export class OrdersService {
   constructor(
     @InjectRepository(Order) private orderRepo: Repository<Order>,
     @InjectRepository(Product) private productRepo: Repository<Product>,
+    private amqpConnection: AmqpConnection,
   ) {}
 
   // select * from products where id in (1, 2, 3)
@@ -41,6 +43,11 @@ export class OrdersService {
       }),
     });
     await this.orderRepo.save(order);
+    await this.amqpConnection.publish('amq.direct', 'OrderCreated', {
+      order_id: order.id,
+      card_hash: createOrderDto.card_hash,
+      total: order.total,
+    });
     return order;
   }
 
